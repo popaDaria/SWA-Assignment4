@@ -1,27 +1,27 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-</template>
-
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
+import UserScores from './components/UserScores.vue';
+import LoginUser from './components/LoginUser.vue';
+import RegisterUser from './components/RegisterUser.vue';
+import UserProfile from './components/UserProfile.vue';
+import GameBoard from './components/GameBoard.vue';
 
 @Options({
   components: {
-    HelloWorld,
+    UserScores,
+    LoginUser,
+    RegisterUser,
+    UserProfile,
+    GameBoard
   },
 })
-export default class App extends Vue {}
+export default class App extends Vue { }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<template>
+  <UserScores />
+  <LoginUser />
+  <RegisterUser />
+  <UserProfile />
+  <GameBoard />
+</template>
