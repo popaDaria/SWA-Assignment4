@@ -18,7 +18,8 @@ export default defineComponent({
                 if (result !== 'Invalid username or password') {
                     model.login(result);
                     this.message = '';
-                    //navigate('/');
+                    this.$router.push('/game')
+
                 } else {
                     this.message = result;
                 }
@@ -45,7 +46,7 @@ export default defineComponent({
             </div>
             <div class='login-form-row form-group mt-3'>
                 <label htmlFor='register'>Don't have an account?</label>
-                <Link id='register' to='/register' class="btn btn-outline-warning form-control mt-1">Register</Link>
+                <router-link id='register' to="/register" class="btn btn-outline-warning form-control mt-1">Register</router-link>
             </div>
             <div class='login-form-row'>
                 <label>{{ message }}</label>
