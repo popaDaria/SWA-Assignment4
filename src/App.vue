@@ -35,14 +35,14 @@ export default class App extends Vue {
 
 <template>
   <div id="nav">
-    <div v-if="isLogedIn()">
-      <router-link to="/game">Game</router-link>
-      <router-link to="/profile">Profile</router-link>
-      <router-link to="/scores">Score</router-link>
-      <router-link to="/login" @click="logOut()">Logout</router-link>
+    <div v-if="isLogedIn()" class="btn-group btn-group-justified" style="width: 100%">
+      <router-link class="btn btn-info m-2" to="/game">Game</router-link>
+      <router-link class="btn btn-info m-2" to="/profile">Profile</router-link>
+      <router-link class="btn btn-info m-2" to="/scores">Score</router-link>
+      <router-link class="btn btn-info m-2" to="/login" @click="logOut()">Logout</router-link>
     </div>
-    <div v-else>
-      <router-link to="/login">Login</router-link>
+    <div v-else class="btn-group" style="width: 100%">
+      <router-link class="btn btn-info m-2" to="/login">Login</router-link>
     </div>
   </div>
   <router-view />
