@@ -6,7 +6,7 @@ import RegisterUser from './components/RegisterUser.vue';
 import UserProfile from './components/UserProfile.vue';
 import GameBoard from './components/GameBoard.vue';
 import * as api from "@/api/api";
-import {model} from "@/api/store";
+import { model } from "@/api/store";
 
 @Options({
   components: {
@@ -18,9 +18,14 @@ import {model} from "@/api/store";
   },
 })
 export default class App extends Vue {
+  isLogedIn() {
+    if (model.user.token && model.user.token !== '')
+      return true;
+    return false;
+  }
   logOut() {
-    if(model.user.token !== undefined) {
-      api.logoutUser(model.user.token).then((result) => {
+    if (model.user.token !== undefined) {
+      api.logoutUser(model.user.token).then(() => {
         model.logout();
       });
     }
@@ -30,11 +35,15 @@ export default class App extends Vue {
 
 <template>
   <div id="nav">
-    <router-link to="/game">Game</router-link> |
-    <router-link to="/login">Login</router-link> |
-    <router-link to="/profile">Profile</router-link> |
-    <router-link to="/scores">Score</router-link> |
-    <router-link to="/login" @click="logOut()">Logout</router-link>
+    <div v-if="isLogedIn()">
+      <router-link to="/game">Game</router-link>
+      <router-link to="/profile">Profile</router-link>
+      <router-link to="/scores">Score</router-link>
+      <router-link to="/login" @click="logOut()">Logout</router-link>
+    </div>
+    <div v-else>
+      <router-link to="/login">Login</router-link>
+    </div>
   </div>
-  <router-view/>
+  <router-view />
 </template>

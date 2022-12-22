@@ -46,7 +46,7 @@ export default defineComponent({
                         this.selected = false;
                         for (let effect of moveResults.effects) {
                             if (effect.kind === 'Match') {
-                                if(effect.match?.positions.length){
+                                if (effect.match?.positions.length) {
                                     model.increaseScore((effect.match?.positions.length - 2) * 5) // 5 points for a 3 match, +5 points for each additional piece in a match (i.e. a 5 piece match is 15 points)
                                 }
                                 model.setMatches(effect.match?.positions ? effect.match?.positions : [])
@@ -60,12 +60,12 @@ export default defineComponent({
                         }
                         await this.timeout(1000)
                     } else {
-                        model.setMessage("CAN'T MAKE MOVE")
+                        model.setMessage("CAN'T MAKE MOVE");
                         setTimeout(() => {
                             model.setMessage('')
                         }, 1000);
                     }
-                    model.setSelectedPiece(undefined)                    
+                    model.setSelectedPiece(undefined);
                     this.selected = false;
                     model.setCalculatingMove(false); //user can make moves again
 
@@ -79,6 +79,7 @@ export default defineComponent({
                     }
                 } else {
                     model.setSelectedPiece({ row: this.rowIndex, col: this.colIndex })
+                    this.selected = false;
                 }
             }
         }
@@ -87,8 +88,11 @@ export default defineComponent({
 </script>
 
 <template>
-    <button class="row-element"
-        :class="{ 'row-element--selected': (selected || (model.play.matches.some((pos) => pos.row === rowIndex && pos.col === colIndex))) }"
+    <button class="row-element" :class="{
+        'row-element--selected': (selected
+            || (model.play.selectedPiece?.row === rowIndex && model.play.selectedPiece.col === colIndex)
+            || (model.play.matches.some((pos) => pos.row === rowIndex && pos.col === colIndex)))
+    }"
         @click="selectedElement()">
         {{ element }}
     </button>
