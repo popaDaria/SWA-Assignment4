@@ -24,7 +24,9 @@ export default {
         <div
           v-for="game in model.games.filter((game) => game.completed).sort((a, b) => b.score - a.score).splice(0, 10)"
           class='alert alert-info m-auto mb-2' v-bind:key="game.id">
-          Player {{ game.user }} - {{ game.score }} points
+          <span v-if="game.user === model.user.userId"> YOU </span>
+          <span v-else>Player {{ game.user }} </span>
+          - {{ game.score }} points
         </div>
       </div>
     </div>

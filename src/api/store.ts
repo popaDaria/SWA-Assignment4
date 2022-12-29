@@ -26,7 +26,7 @@ export type Model = {
     logout(): void
 }
 
-const generator: BoardModel.RandomGenerator = new BoardModel.RandomGenerator('A,B,C,D');
+const generator: BoardModel.RandomGenerator = new BoardModel.RandomGenerator('bananas,grapes,orange,strawberry');
 const initBoard = BoardModel.create(generator, 5, 5);
 BoardModel.handleMatches(BoardModel.getMatches(initBoard), initBoard, generator, [])
 

@@ -19,7 +19,7 @@ export default defineComponent({
                 api.registerUser(this.username, this.password).then((result) => {
                     if (result !== 'Username already taken') {
                         this.message = '';
-                        // navigate('/');
+                        this.$router.push('/login');
                     } else {
                         this.message = result;
                     }

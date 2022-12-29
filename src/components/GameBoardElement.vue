@@ -23,12 +23,16 @@ export default defineComponent({
         return {
             model,
             selected: false,
-            generator: new BoardModel.RandomGenerator('A,B,C,D'),
+            generator: new BoardModel.RandomGenerator('bananas,grapes,orange,strawberry')
         }
     },
     methods: {
         timeout(delay: number) {
             return new Promise(res => setTimeout(res, delay));
+        },
+        getImgUrl(element: string): string {
+            var images = require.context('../assets/', false, /\.png$/)
+            return images('./' + element + ".png")
         },
         async selectedElement() {
             if (!model.play.calculatingMove && !model.game.completed) {
@@ -93,8 +97,9 @@ export default defineComponent({
             || (model.play.selectedPiece?.row === rowIndex && model.play.selectedPiece.col === colIndex)
             || (model.play.matches.some((pos) => pos.row === rowIndex && pos.col === colIndex)))
     }" @click="selectedElement()">
-        {{ element }}
+        <img class="tile-image" :src="getImgUrl(element)" v-bind:alt="element">
     </button>
+
 </template>
 
 <style>
@@ -114,5 +119,10 @@ export default defineComponent({
 
 .row-element--selected {
     background-color: aqua;
+}
+
+.tile-image {
+    width: 25px;
+    height: 25px;
 }
 </style>
