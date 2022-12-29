@@ -92,8 +92,7 @@ export default defineComponent({
         'row-element--selected': (selected
             || (model.play.selectedPiece?.row === rowIndex && model.play.selectedPiece.col === colIndex)
             || (model.play.matches.some((pos) => pos.row === rowIndex && pos.col === colIndex)))
-    }"
-        @click="selectedElement()">
+    }" @click="selectedElement()">
         {{ element }}
     </button>
 </template>

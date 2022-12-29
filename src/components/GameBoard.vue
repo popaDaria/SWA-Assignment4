@@ -1,8 +1,8 @@
 <script lang="ts">
 import * as api from '@/api/api'
-import {model} from '@/api/store'
+import { model } from '@/api/store'
 import GameBoardElement from '@/components/GameBoardElement.vue'
-import {defineComponent} from "vue";
+import { defineComponent } from "vue";
 
 export default defineComponent({
   data() {
@@ -20,29 +20,29 @@ export default defineComponent({
       model.emptyGameData();
       let hasBoard = true;
       api.getGameById(model.user.token!, id)
-          .then((result) => {
-            model.setGameData(result), result.board ? hasBoard = true : hasBoard = false
-          })
-          .then(() => {
-            if (!hasBoard) {
-              model.initializeNewBoard();
-              api.updateGame(model.user.token!, model.game.id, model.game);
-            }
-          })
-          .then(() => this.playStarted = true);
+        .then((result) => {
+          model.setGameData(result), result.board ? hasBoard = true : hasBoard = false
+        })
+        .then(() => {
+          if (!hasBoard) {
+            model.initializeNewBoard();
+            api.updateGame(model.user.token!, model.game.id, model.game);
+          }
+        })
+        .then(() => this.playStarted = true);
     },
     startAnotherGame() {
       this.playStarted = false;
       model.emptyGameData();
       model.initializeNewBoard();
       api.startNewGame(this.model.user.token!)
-          .then((result) => {
-            api.updateGame(model.user.token!, result.id, {
-              ...this.model.game, id: result.id, user: model.user.userId!
-            }),
-                model.setGameData({...model.game, id: result.id})
-          })
-          .then(() => this.playStarted = true);
+        .then((result) => {
+          api.updateGame(model.user.token!, result.id, {
+            ...this.model.game, id: result.id, user: model.user.userId!
+          }),
+            model.setGameData({ ...model.game, id: result.id })
+        })
+        .then(() => this.playStarted = true);
     }
   },
   mounted() {
@@ -85,16 +85,16 @@ export default defineComponent({
       <div class='play-end' v-else>
         <div v-if="model.game.score >= model.game.targetScore">Congrats! You won with a score of {{
             model.game.score
-          }} and {{ model.game.nrOfMoves }} moves left.
+        }} and {{ model.game.nrOfMoves }} moves left.
         </div>
         <div v-else>You were {{ (model.game.targetScore - model.game.score) }} points away! Try again?</div>
       </div>
       <div class='row' v-for="(row, index) in model.game.board?.content" v-bind:key="'Row' + index">
         <div class='element' v-for="(element, colIndex) in row" v-bind:key="'Tile' + index + ',' + colIndex">
-          <GameBoardElement :rowIndex='index' :colIndex='colIndex' :element='element'/>
+          <GameBoardElement :rowIndex='index' :colIndex='colIndex' :element='element' />
         </div>
       </div>
-      <div class='play-message'>
+      <div class='play-message text-danger'>
         {{ model.play.message }}
       </div>
     </div>
@@ -103,8 +103,8 @@ export default defineComponent({
       <div class='container'>
         <div class='row'>
           <button class='btn btn-light btn-block col-4'
-                  v-for="game in model.games.filter((game) => !game.completed && game.user === model.user.userId)"
-                  v-bind:key="game.id" @click="continueGame(game.id)">Game {{ game.id }}
+            v-for="game in model.games.filter((game) => !game.completed && game.user === model.user.userId)"
+            v-bind:key="game.id" @click="continueGame(game.id)">Game {{ game.id }}
           </button>
         </div>
       </div>
@@ -117,12 +117,6 @@ export default defineComponent({
 </template>
 
 <style>
-/* .play-message {
-    position: absolute;
-    bottom: 0;
-    margin-bottom: 20px;
-} */
-
 .element {
   width: 50px !important;
   padding: 0 !important;

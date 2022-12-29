@@ -46,10 +46,11 @@ export default defineComponent({
             </div>
             <div class='login-form-row form-group mt-3'>
                 <label htmlFor='register'>Don't have an account?</label>
-                <router-link id='register' to="/register" class="btn btn-outline-warning form-control mt-1">Register</router-link>
+                <router-link id='register' to="/register"
+                    class="btn btn-outline-warning form-control mt-1">Register</router-link>
             </div>
             <div class='login-form-row'>
-                <label>{{ message }}</label>
+                <label class="text-danger">{{ message }}</label>
             </div>
         </div>
     </div>

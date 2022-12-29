@@ -116,8 +116,7 @@ export function handleMatches<T>(matches: Match<T>[], newBoard: Board<T>, genera
         });
     });
     for (let i: number = newBoard.height - 1; i >= 0; i--) {
-        // eslint-disable-next-line 
-        for (let j: number = 0; j < newBoard.width; j++) {
+        for (let j = 0; j < newBoard.width; j++) {
             if (!newBoard.content[i][j]) {
                 for (let k: number = i; k > 0; k--) {
                     newBoard.content[i][j] = newBoard.content[k - 1][j];
